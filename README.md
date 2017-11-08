@@ -2,18 +2,11 @@
 
 ## Running:
 
-`hhvm src/burn.hh http://127.0.0.1:8080/debug/tst/burn/src/burn.hh http://localhost 100 100`
+`docker build -t tug .` — build image
+`docker run --tty --interactive --privileged -p 8080:80 tug /bin/bash -l` — run it
+`/usr/bin/hhvm -d hhvm.hack.lang.look_for_typechecker=0 -m server -p 8080 -d hhvm.jit=false &` — start server inside
 
-The first argument should be the URL of burn.hh accessible through http.
-The second argument is an arbitrary webpage to be retrieved by the sevice (here it's just the default Apache page).
-The third argument controls the total number of attempts.
-The fourth argument control the total number of parallel requests.
-
-Particulars needed to cause the crash may vary.
-
-## Alternative runner:
-
-`./run.sh` — build and run test in the isolated docker containers. Requires docker-compose.
+`hhvm -d hhvm.hack.lang.look_for_typechecker=0 burn.hh http://localhost:8080/burn.hh http://localhost:8080 1 10` — test
 
 ## Effects:
 
